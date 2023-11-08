@@ -2,10 +2,10 @@ import {
   Actions,
   BaseExt,
   Plugin,
-} from "https://deno.land/x/dpp_vim@v0.0.3/types.ts";
-import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.0.3/deps.ts";
-import { isDirectory } from "https://deno.land/x/dpp_vim@v0.0.3/utils.ts";
-import { basename } from "https://deno.land/std@0.202.0/path/mod.ts";
+} from "https://deno.land/x/dpp_vim@v0.0.7/types.ts";
+import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.0.7/deps.ts";
+import { isDirectory } from "https://deno.land/x/dpp_vim@v0.0.7/utils.ts";
+import { basename } from "https://deno.land/std@0.205.0/path/mod.ts";
 
 type Params = Record<string, never>;
 
