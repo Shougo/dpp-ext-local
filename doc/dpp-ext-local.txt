@@ -46,7 +46,7 @@ EXAMPLES                                              *dpp-ext-local-examples*
 	      merged: false,
 	    },
 	  },
-	) as Plugin[];
+	) as Plugin[] | undefined;
 <
 
 ==============================================================================

@@ -30,5 +30,5 @@ const localPlugins = await args.dpp.extAction(
       merged: false,
     },
   },
-) as Plugin[];
+) as Plugin[] | undefined;
 ```
