@@ -3,7 +3,7 @@ import {
   BaseExt,
   Plugin,
 } from "https://deno.land/x/dpp_vim@v0.0.9/types.ts";
-import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.0.9/deps.ts";
+import { Denops } from "https://deno.land/x/dpp_vim@v0.0.9/deps.ts";
 import { isDirectory } from "https://deno.land/x/dpp_vim@v0.0.9/utils.ts";
 import { basename } from "https://deno.land/std@0.212.0/path/mod.ts";
 import { expandGlob } from "https://deno.land/std@0.212.0/fs/expand_glob.ts";
