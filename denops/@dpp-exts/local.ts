@@ -2,10 +2,11 @@ import {
   Actions,
   BaseExt,
   Plugin,
-} from "https://deno.land/x/dpp_vim@v0.0.7/types.ts";
-import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.0.7/deps.ts";
-import { isDirectory } from "https://deno.land/x/dpp_vim@v0.0.7/utils.ts";
-import { basename } from "https://deno.land/std@0.205.0/path/mod.ts";
+} from "https://deno.land/x/dpp_vim@v0.0.9/types.ts";
+import { Denops, fn } from "https://deno.land/x/dpp_vim@v0.0.9/deps.ts";
+import { isDirectory } from "https://deno.land/x/dpp_vim@v0.0.9/utils.ts";
+import { basename } from "https://deno.land/std@0.212.0/path/mod.ts";
+import { expandGlob } from "https://deno.land/std@0.212.0/fs/expand_glob.ts";
 
 type Params = Record<string, never>;
 
@@ -33,17 +34,12 @@ export class Ext extends BaseExt<Params> {
 
         let plugins: Plugin[] = [];
         for (const include of params.includes ?? ["*"]) {
-          const files = await fn.glob(
-            args.denops,
-            base + "/" + include,
-            1,
-            1,
-          ) as string[];
-
-          const bits = await Promise.all(
-            files.map(async (file) => await isDirectory(file)),
-          );
-          const dirs = files.filter((_) => bits.shift());
+          const dirs = [];
+          for await (const file of expandGlob(`${base}/${include}`)) {
+            if (await isDirectory(file.path)) {
+              dirs.push(file.path);
+            }
+          }
 
           plugins = plugins.concat(
             dirs.map((dir) => {
