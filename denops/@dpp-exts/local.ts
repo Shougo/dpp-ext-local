@@ -1,11 +1,13 @@
 import {
   Actions,
   BaseExt,
+  Denops,
   Plugin,
-} from "https://deno.land/x/dpp_vim@v0.2.0/types.ts";
-import { basename, Denops } from "https://deno.land/x/dpp_vim@v0.2.0/deps.ts";
-import { isDirectory } from "https://deno.land/x/dpp_vim@v0.2.0/utils.ts";
-import { expandGlob } from "jsr:@std/fs@0.224.0/expand-glob";
+} from "jsr:@shougo/dpp-vim@1.0.0/types";
+import { isDirectory } from "jsr:@shougo/dpp-vim@1.0.0/utils";
+
+import { basename } from "jsr:@std/path@1.0.2";
+import { expandGlob } from "jsr:@std/fs@1.0.0/expand-glob";
 
 type Params = Record<string, never>;
 
