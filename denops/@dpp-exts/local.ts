@@ -1,17 +1,18 @@
 import {
-  Actions,
+  type Actions,
   BaseExt,
-  Denops,
-  Plugin,
-} from "jsr:@shougo/dpp-vim@1.0.0/types";
-import { isDirectory } from "jsr:@shougo/dpp-vim@1.0.0/utils";
+  type Plugin,
+} from "jsr:@shougo/dpp-vim@2.1.0/types";
+import { isDirectory } from "jsr:@shougo/dpp-vim@2.1.0/utils";
+
+import type { Denops } from "jsr:@denops/std@~7.0.1";
 
 import { basename } from "jsr:@std/path@1.0.2";
-import { expandGlob } from "jsr:@std/fs@1.0.0/expand-glob";
+import { expandGlob } from "jsr:@std/fs@1.0.1/expand-glob";
 
-type Params = Record<string, never>;
+export type Params = Record<string, never>;
 
-type LocalArgs = {
+export type LocalArgs = {
   directory: string;
   options?: Partial<Plugin>;
   includes?: string[];
