@@ -1,5 +1,5 @@
 {
-  "name": "@shougo/dpp-ext-lazy",
+  "name": "@shougo/dpp-ext-local",
   "version": "0.0.0",
   "exports": {
     ".": "./denops/@dpp-exts/local.ts"
