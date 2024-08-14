@@ -1,9 +1,11 @@
 import {
+  type Action,
   type Actions,
+  type BaseActionParams,
   BaseExt,
   type Plugin,
-} from "jsr:@shougo/dpp-vim@2.1.0/types";
-import { isDirectory } from "jsr:@shougo/dpp-vim@2.1.0/utils";
+} from "jsr:@shougo/dpp-vim@~2.2.0/types";
+import { isDirectory } from "jsr:@shougo/dpp-vim@2.2.0/utils";
 
 import type { Denops } from "jsr:@denops/std@~7.0.1";
 
@@ -18,14 +20,19 @@ export type LocalArgs = {
   includes?: string[];
 };
 
+export interface ExtActions<Params extends BaseActionParams>
+  extends Actions<Params> {
+  local: Action<Params, Plugin[]>;
+}
+
 export class Ext extends BaseExt<Params> {
-  override actions: Actions<Params> = {
+  override actions: ExtActions<Params> = {
     local: {
       description: "Load local plugins",
       callback: async (args: {
         denops: Denops;
         actionParams: unknown;
-      }) => {
+      }): Promise<Plugin[]> => {
         const params = args.actionParams as LocalArgs;
         const base = await args.denops.call(
           "dpp#util#_expand",
