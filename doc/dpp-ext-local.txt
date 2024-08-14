@@ -37,6 +37,7 @@ EXAMPLES                                              *dpp-ext-local-examples*
 	} from "jsr:@shougo/dpp-ext-local";
 
 	const [context, options] = await args.contextBuilder.get(args.denops);
+	const protocols = await args.dpp.getProtocols(args.denops, options);
 	
 	// Get plugins from other exts
 	const plugins = ...
