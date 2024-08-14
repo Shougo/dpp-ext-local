@@ -31,22 +31,44 @@ https://github.com/vim-denops/denops.vim
 ==============================================================================
 EXAMPLES                                              *dpp-ext-local-examples*
 >typescript
+	import type {
+	  Ext as LocalExt,
+	  Params as LocalParams,
+	} from "jsr:@shougo/dpp-ext-local";
+
 	const [context, options] = await args.contextBuilder.get(args.denops);
 	
-	const localPlugins = await args.dpp.extAction(
+	// Get plugins from other exts
+	const plugins = ...
+	
+	const [localExt, localOptions, localParams]: [
+	  LocalExt | undefined,
+	  ExtOptions,
+	  LocalParams,
+	] = await args.dpp.getExt(
 	  args.denops,
-	  context,
 	  options,
 	  "local",
-	  "local",
-	  {
-	    directory: "~/work",
-	    options: {
-	      frozen: true,
-	      merged: false,
+	) as [LocalExt | undefined, ExtOptions, LocalParams];
+	if (localExt) {
+	  const action = localExt.actions.local;
+	
+	  const localPlugins = await action.callback({
+	    denops: args.denops,
+	    context,
+	    options,
+	    protocols,
+	    extOptions: localOptions,
+	    extParams: localParams,
+	    actionParams: {
+	      directory: "~/work",
+	      options: {
+	        frozen: true,
+	        merged: false,
+	      },
 	    },
-	  },
-	) as Plugin[] | undefined;
+	  });
+	}
 <
 
 ==============================================================================
