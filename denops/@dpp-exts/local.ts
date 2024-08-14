@@ -32,7 +32,7 @@ export class Ext extends BaseExt<Params> {
       callback: async (args: {
         denops: Denops;
         actionParams: unknown;
-      }): Promise<Plugin[]> => {
+      }) => {
         const params = args.actionParams as LocalArgs;
         const base = await args.denops.call(
           "dpp#util#_expand",
