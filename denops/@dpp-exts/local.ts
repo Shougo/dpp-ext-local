@@ -1,6 +1,5 @@
 import {
   type Action,
-  type Actions,
   type BaseActionParams,
   BaseExt,
   type Plugin,
@@ -20,8 +19,7 @@ export type LocalArgs = {
   includes?: string[];
 };
 
-export interface ExtActions<Params extends BaseActionParams>
-  extends Actions<Params> {
+export type ExtActions<Params extends BaseActionParams> = {
   local: Action<Params, Plugin[]>;
 }
 
