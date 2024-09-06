@@ -1,15 +1,11 @@
-import {
-  type Action,
-  type BaseActionParams,
-  BaseExt,
-  type Plugin,
-} from "jsr:@shougo/dpp-vim@~2.2.0/types";
-import { isDirectory } from "jsr:@shougo/dpp-vim@2.2.0/utils";
+import { type BaseParams, type Plugin } from "jsr:@shougo/dpp-vim@~3.0.0/types";
+import { type Action, BaseExt } from "jsr:@shougo/dpp-vim@~3.0.0/ext";
+import { isDirectory } from "jsr:@shougo/dpp-vim@3.0.0/utils";
 
-import type { Denops } from "jsr:@denops/std@~7.0.1";
+import type { Denops } from "jsr:@denops/std@~7.1.0";
 
-import { basename } from "jsr:@std/path@1.0.2";
-import { expandGlob } from "jsr:@std/fs@1.0.1/expand-glob";
+import { basename } from "jsr:@std/path@~1.0.2/basename";
+import { expandGlob } from "jsr:@std/fs@~1.0.1/expand-glob";
 
 export type Params = Record<string, never>;
 
@@ -19,9 +15,9 @@ export type LocalArgs = {
   includes?: string[];
 };
 
-export type ExtActions<Params extends BaseActionParams> = {
+export type ExtActions<Params extends BaseParams> = {
   local: Action<Params, Plugin[]>;
-}
+};
 
 export class Ext extends BaseExt<Params> {
   override actions: ExtActions<Params> = {
@@ -29,7 +25,7 @@ export class Ext extends BaseExt<Params> {
       description: "Load local plugins",
       callback: async (args: {
         denops: Denops;
-        actionParams: unknown;
+        actionParams: BaseParams;
       }) => {
         const params = args.actionParams as LocalArgs;
         const base = await args.denops.call(
