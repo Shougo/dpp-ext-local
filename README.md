@@ -26,7 +26,6 @@ const localPlugins = await args.dpp.extAction(
   {
     directory: "~/work",
     options: {
-      frozen: true,
       merged: false,
     },
   },

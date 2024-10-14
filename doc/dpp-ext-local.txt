@@ -64,7 +64,6 @@ EXAMPLES                                              *dpp-ext-local-examples*
 	    actionParams: {
 	      directory: "~/work",
 	      options: {
-	        frozen: true,
 	        merged: false,
 	      },
 	    },
