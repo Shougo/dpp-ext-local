@@ -44,8 +44,9 @@ export class Ext extends BaseExt<Params> {
             }
           }
 
-          plugins = plugins.concat(
-            dirs.map((dir) => {
+          plugins = [
+            ...plugins,
+            ...dirs.map((dir) => {
               return {
                 ...defaultOptions,
                 repo: dir,
@@ -54,7 +55,7 @@ export class Ext extends BaseExt<Params> {
                 name: basename(dir),
               };
             }),
-          );
+          ];
         }
 
         return plugins;
