@@ -31,31 +31,27 @@ export class Ext extends BaseExt<Params> {
         const base = await args.denops.call(
           "dpp#util#_expand",
           params.directory,
-        );
+        ) as string;
 
         const defaultOptions = params.options ?? {};
+        const includes = params.includes ?? ["*"];
+        const plugins: Plugin[] = [];
 
-        let plugins: Plugin[] = [];
-        for (const include of params.includes ?? ["*"]) {
-          const dirs = [];
-          for await (const file of expandGlob(`${base}/${include}`)) {
-            if (await isDirectory(file.path)) {
-              dirs.push(file.path);
+        for (const include of includes) {
+          const pattern = `${base}/${include}`;
+          for await (const file of expandGlob(pattern)) {
+            if (!(await isDirectory(file.path))) {
+              continue;
             }
-          }
 
-          plugins = [
-            ...plugins,
-            ...dirs.map((dir) => {
-              return {
-                ...defaultOptions,
-                repo: dir,
-                local: true,
-                path: dir,
-                name: basename(dir),
-              };
-            }),
-          ];
+            plugins.push({
+              ...defaultOptions,
+              repo: file.path,
+              local: true,
+              path: file.path,
+              name: basename(file.path),
+            });
+          }
         }
 
         return plugins;
